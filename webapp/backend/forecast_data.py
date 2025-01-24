@@ -20,7 +20,7 @@ LATITUDE = 24.8607
 LONGITUDE = 67.0011
 
 # Initialize Hopsworks Feature Store and Model Registry
-project = hopsworks.login(api_key_value=hopsworks_api_key)
+project = hopsworks.login(api_key_value="hopsworks_api_key")
 fs = project.get_feature_store()
 mr = project.get_model_registry()
 

@@ -27,10 +27,12 @@ hopsworks_api_key = os.getenv("HOPSWORKS_API_KEY")
 LATITUDE = 24.8607
 LONGITUDE = 67.0011
 
-def fetch_and_predict_aqi_data(day_count, model_name):
+# def fetch_and_predict_aqi_data(day_count, model_name):
+def fetch_and_predict_aqi_data(day_count, model_name, latitude, longitude):
+
     try:
         # Initialize Hopsworks Feature Store and Model Registry
-        project = hopsworks.login(api_key_value=hopsworks_api_key)
+        project = hopsworks.login(api_key_value="hopsworks_api_key")
         mr = project.get_model_registry()
 
         # Fetch all models with the specified name and get the latest version
@@ -143,12 +145,14 @@ def fetch_and_predict_aqi_data(day_count, model_name):
 
 @app.get("/predict")
 def predict_aqi_api():
+    # forecast_df = fetch_and_predict_aqi_data(day_count=3, model_name="random_forest", latitude=LATITUDE, longitude=LONGITUDE)
+    
     forecast_df = fetch_and_predict_aqi_data(
         day_count=3,
         model_name="random_forest",
         latitude=LATITUDE,
         longitude=LONGITUDE,
-        api_key=API_KEY
+        # api_key=API_KEY
     )
 
     # Check if the forecast data is available and return the result
