@@ -1,22 +1,26 @@
 # Loads the model and features from the Feature Store
 
+import os
 import requests
 from datetime import datetime, timedelta, timezone
 import pandas as pd
 import hopsworks
 import joblib
 
-API_KEY = "d0daaf650425edd685b9e1831cf94b32"
 # Forecast URLs
 URL_POLLUTION_FORECAST = "http://api.openweathermap.org/data/2.5/air_pollution/forecast"
 URL_WEATHER_FORECAST = "https://api.open-meteo.com/v1/forecast"
+
+# Fetch API keys from environment variables
+API_KEY = os.getenv("OPEN_WEATHER_API")
+hopsworks_api_key = os.getenv("HOPSWORKS_API_KEY")
 
 # Location
 LATITUDE = 24.8607
 LONGITUDE = 67.0011
 
 # Initialize Hopsworks Feature Store and Model Registry
-project = hopsworks.login(api_key_value="n7jRofG3Y9HUQ8Zi.hUbA78pZislL2kOnmPCnOPYberwqZf798dkc1ebR1czoVZ3LwMYsPvKonujAjQkY")
+project = hopsworks.login(api_key_value=hopsworks_api_key)
 fs = project.get_feature_store()
 mr = project.get_model_registry()
 
