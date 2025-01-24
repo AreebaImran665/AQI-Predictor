@@ -76,30 +76,31 @@ max_temp = daily_data.get("temperature_2m_max", [0])[0]
 min_temp = daily_data.get("temperature_2m_min", [0])[0]
 precipitation = daily_data.get("precipitation_sum", [0])[0]
 max_wind_speed = daily_data.get("windspeed_10m_max", [0])[0]
-
+if precipitation is None:
+    precipitation = 0.0
 # Combine data into a single dictionary
 data = {
     "readable_time": readable_time,
-    "day_offset": day_offset,
-    "hour": hour,
-    "day": day,
-    "month": month,
+    "day_offset": int(day_offset),
+    "hour": int(hour),
+    "day": int(day),
+    "month": int(month),
     "latitude": latitude,
     "longitude": longitude,
-    "aqi": aqi,
-    "aqi_change_rate": aqi_change_rate,
-    "co": co,
-    "no": no,
-    "no2": no2,
-    "o3": o3,
-    "so2": so2,
-    "pm2_5": pm2_5,
-    "pm10": pm10,
-    "nh3": nh3,
-    "max_temp": max_temp,
-    "min_temp": min_temp,
-    "precipitation": precipitation,
-    "max_wind_speed": max_wind_speed
+    "aqi": int(aqi),
+    "aqi_change_rate": int(aqi_change_rate),
+    "co": float(co),
+    "no": int(no),
+    "no2": float(no2),
+    "o3": float(o3),
+    "so2": float(so2),
+    "pm2_5": float(pm2_5),
+    "pm10": float(pm10),
+    "nh3": float(nh3),
+    "max_temp": float(max_temp),
+    "min_temp": float(min_temp),
+    "precipitation": float(precipitation),
+    "max_wind_speed": float(max_wind_speed)
 }
 
 # Convert to Pandas DataFrame
