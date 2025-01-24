@@ -7,25 +7,26 @@
 
 # Backfilling Weather and Pollutant Historical Data for 400 days
 
-
+import os
 import requests
 from datetime import datetime, timedelta, timezone
 import pandas as pd
 import hopsworks
 
-# API Keys and URLs
-API_KEY = "d0daaf650425edd685b9e1831cf94b32"
+# URLs
 URL_POLLUTION = "http://api.openweathermap.org/data/2.5/air_pollution/history"
 URL_WEATHER = "https://archive-api.open-meteo.com/v1/archive"
+
+# Fetch API keys from environment variables
+API_KEY = os.getenv("OPEN_WEATHER_API")
+hopsworks_api_key = os.getenv("HOPSWORKS_API_KEY")
 
 # Location
 LATITUDE = 24.8607
 LONGITUDE = 67.0011
 
 # Initialize Hopsworks Feature Store
-project = hopsworks.login(api_key_value="n7jRofG3Y9HUQ8Zi.hUbA78pZislL2kOnmPCnOPYberwqZf798dkc1ebR1czoVZ3LwMYsPvKonujAjQkY")
-# project = hopsworks.login(api_key_value="Xzjv1TKrbxrZxlPu.nu12KCtSTikBGJVCU0BGmWXTe5ppztGqhtlZp4JKhlduh8GwjQm2YyuSPvBzLJyA")
-
+project = hopsworks.login(api_key_value=hopsworks_api_key)
 fs = project.get_feature_store()
 
 

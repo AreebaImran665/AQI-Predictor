@@ -5,14 +5,18 @@
 # -----------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------
 
+import os
 import requests
 from datetime import datetime
 import hopsworks
 
-# API URLs and Keys
+# API URLs
 open_weather_url = "http://api.openweathermap.org/data/2.5/air_pollution"
 open_meteo_url = "https://api.open-meteo.com/v1/forecast"
-open_weather_api_key = "d0daaf650425edd685b9e1831cf94b32"
+
+# Fetch API keys from environment variables
+open_weather_api_key = os.getenv("OPEN_WEATHER_API")
+hopsworks_api_key = os.getenv("HOPSWORKS_API_KEY")
 
 # Location details
 latitude = 24.8607
@@ -23,7 +27,7 @@ aqi_change_rate = 0
 day_offset = 0
 
 # Initialize Hopsworks connection
-project = hopsworks.login(api_key_value="n7jRofG3Y9HUQ8Zi.hUbA78pZislL2kOnmPCnOPYberwqZf798dkc1ebR1czoVZ3LwMYsPvKonujAjQkY")
+project = hopsworks.login(api_key_value=hopsworks_api_key)
 fs = project.get_feature_store()
 
 # Fetch Air Pollution Data

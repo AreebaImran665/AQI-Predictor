@@ -25,5 +25,8 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run feature pipeline
+        env:
+          OPEN_WEATHER_API: ${{ secrets.OPEN_WEATHER_API }}
+          HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
         run: |
           python feature_pipeline.py

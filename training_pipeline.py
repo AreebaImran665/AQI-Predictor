@@ -5,10 +5,13 @@
 # -----------------------------------------------------------------------------------------------------
 # -----------------------------------------------------------------------------------------------------
 
+import os
 import hopsworks
 
+hopsworks_api_key = os.getenv("HOPSWORKS_API_KEY")
+
 # Fetching Data From Hopswork
-project = hopsworks.login(api_key_value="n7jRofG3Y9HUQ8Zi.hUbA78pZislL2kOnmPCnOPYberwqZf798dkc1ebR1czoVZ3LwMYsPvKonujAjQkY") 
+project = hopsworks.login(api_key_value=hopsworks_api_key) 
 
 fs = project.get_feature_store()  # Access the feature store
 
